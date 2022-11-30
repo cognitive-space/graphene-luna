@@ -20,6 +20,6 @@ jobs:
 
       - name: pytest
         run: |
-          export PYTHONPATH=(pwd)
+          export PYTHONPATH=$(pwd)
           cd tests
           pytest -sx
