@@ -24,7 +24,7 @@ class CommentSubscription:
             after = timezone.now()
 
         while 1:
-            async for comment in Comment.objects.filter(blogpost_id=post_id, published__gt=after).order_by('published')[:100]:
+            async for comment in Comment.objects.filter(blogpost_id=post_id, published__gt=after).order_by('published'):
                 after = comment.published
                 yield comment
 
