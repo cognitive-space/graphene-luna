@@ -112,5 +112,5 @@ Currently Luna works with [Django Graphene](https://github.com/graphql-python/gr
 ## Going Further
 
 - [Example Subscriptions](docs/subs-examples.md)
-- [Middleware for Web Sockets](docs/middleware.md)
+- [Middleware for Websockets](docs/middleware.md)
 - [Implementation Details](docs/details.md)
