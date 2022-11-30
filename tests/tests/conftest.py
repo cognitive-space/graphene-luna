@@ -1,5 +1,3 @@
-import os
-import signal
 from pathlib import Path
 
 import pytest
@@ -15,10 +13,9 @@ def ws_client(xprocess):
         pattern = "Application startup complete"
 
         # command to start process
-        args = ['gunicorn lunastarter.asgi:application -k uvicorn.workers.UvicornWorker']
+        args = ['gunicorn', 'lunastarter.asgi:application', '-k', 'uvicorn.workers.UvicornWorker']
 
         popen_kwargs = {
-            "shell": True,
             "cwd": str(Path(__file__).parent.parent)
         }
 
@@ -29,4 +26,4 @@ def ws_client(xprocess):
     yield client
 
     # clean up whole process tree afterwards
-    os.kill(pid, signal.SIGKILL)
+    xprocess.getinfo("gunicorn").terminate()
