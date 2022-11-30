@@ -95,7 +95,7 @@ Running with Gunicorn looks something like:
 
 ### Step 5: Test Out Your Subscription
 
-Navigate to your GraphiQL Explorer and to test out the subscription above use a query like:
+Navigate to your GraphiQL Explorer and to test out the subscription above, use a query like:
 
 ```graphql
 subscription {
