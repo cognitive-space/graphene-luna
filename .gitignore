@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 .pdm.toml
-
+db.sqlite3
