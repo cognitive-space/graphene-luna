@@ -104,3 +104,7 @@ subscription {
 ```
 
 If you're subscription test was successful, then you can proceed to writing more advanced subscriptions.
+
+## Compatibility Notes
+
+Currently Luna works with [Django Graphene](https://github.com/graphql-python/graphene-django) 3.0+ only. Also, Luna implements the older protocol of graphql-ws. We picked to implement the older subscription protocol because more frontend clients seemed to be compatible with it. In the future, we plan to implement the newer graphql-ws protocol too.
