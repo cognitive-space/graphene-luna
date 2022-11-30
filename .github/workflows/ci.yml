@@ -17,6 +17,7 @@ jobs:
           pipx install pdm
           pdm install
 
-      - run: |
+      - name: pytest
+        run: |
           export PATH=$PATH:/github/home/.local/bin
           cd tests && pdm run pytest -sx
