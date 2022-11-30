@@ -24,7 +24,7 @@ GRAPHENE = {
 
 ## Websocket Middleware
 
-The websocket middleware functions much like the standard Django request/response middleware; however, since websockets open a long lived connection and message are received and sent asynchronously it works slightly different.
+The websocket middleware functions much like the standard Django request/response middleware; however, since websockets open a long lived connection and messages are received and sent asynchronously it works slightly different.
 
 This middleware is good for authenticating the initial websocket connection, performing setup and tear down, modifying the send and receive functions.
 
@@ -61,3 +61,41 @@ class AuthAsyncMiddleware:
 
         return await self.func(ws, receive, send)
 ```
+
+## Message Middleware
+
+This is convenience middleware that lets you intercept the messages before and after they have been processed by GraphQL. This could be implemented by modifying the send and receive functions in the websocket middleware, but this gives a simpler mechanism to modify message more directly.
+
+Message middleware setup in `settings.py`:
+
+```python
+GRAPHQL_MESSAGE_MIDDLEWARE = [
+    'myproject.middleware.MessageMiddleware',
+]
+```
+
+Example middleware:
+
+```python
+class post_process_send:
+    def __init__(self, ws, send):
+        self.ws = ws
+        self.send = send
+
+    async def __call__(self, message):
+        message = post_process_message(message)
+        return await self.send(message)
+
+
+class MessageMiddleware:
+    def __init__(self, func):
+        self.func = func
+
+    async def __call__(self, ws, send, data):
+        data = pre_process_message(data)
+
+        send = post_process_send(ws, send)
+
+        return await self.func(ws, send, data)
+```
+
