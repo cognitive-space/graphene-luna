@@ -21,3 +21,43 @@ GRAPHENE = {
 }
 
 ```
+
+## Websocket Middleware
+
+The websocket middleware functions much like the standard Django request/response middleware; however, since websockets open a long lived connection and message are received and sent asynchronously it works slightly different.
+
+This middleware is good for authenticating the initial websocket connection, performing setup and tear down, modifying the send and receive functions.
+
+Websocket middleware setup in `settings.py`:
+
+```python
+GRAPHQL_WS_MIDDLEWARE = [
+    'myproject.middleware.AuthAsyncMiddleware',
+]
+```
+
+Example middleware:
+
+```python
+from importlib import import_module
+
+from asgiref.sync import sync_to_async
+
+from django.contrib import auth
+from django.conf import settings
+
+
+class AuthAsyncMiddleware:
+    def __init__(self, func):
+        self.func = func
+
+    async def __call__(self, ws, receive, send):
+        if not hasattr(ws.request, 'user'):
+            engine = import_module(settings.SESSION_ENGINE)
+            SessionStore = engine.SessionStore
+            session_key = ws.request.COOKIES.get(settings.SESSION_COOKIE_NAME)
+            ws.request.session = SessionStore(session_key)
+            ws.request.user = await sync_to_async(auth.get_user)(ws.request)
+
+        return await self.func(ws, receive, send)
+```
