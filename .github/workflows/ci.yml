@@ -15,9 +15,8 @@ jobs:
           export PATH=$PATH:/github/home/.local/bin
           python3 -m pip install --user pipx
           pipx install pdm
-          pdm install
+          pdm export -d -o requirements.txt --without-hashes
+          pip3 install -r requirements.txt
 
       - name: pytest
-        run: |
-          export PATH=$PATH:/github/home/.local/bin
-          cd tests && pdm run pytest -sx
+        run: cd tests && pytest -sx
