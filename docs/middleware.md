@@ -2,7 +2,7 @@
 
 Websockets in general follow a different lifecycle then HTTP requests.
 
-![websocket sequence](docs/websocket-sequence.png)
+![websocket sequence](websocket-sequence.png)
 
 This means websockets in Django do not have a pre-established middleware mechanism. However, middleware is still helpful with websockets. Because websockets and GraphQL requests have a more complex lifecycle there are several different middleware mechanisms available. This document outlines all the options you have for doing middleware with Graphene GraphQL requests and websockets.
 
