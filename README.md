@@ -99,7 +99,7 @@ Navigate to your GraphiQL Explorer and to test out the subscription above, use a
 
 ```graphql
 subscription {
-  count_seconds(up_to: 25)
+  countSeconds(upTo: 30)
 }
 ```
 
