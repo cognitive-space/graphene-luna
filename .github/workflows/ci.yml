@@ -15,6 +15,7 @@ jobs:
           python3 -m pip install --user pipx
           pipx install pdm
           export PATH=$PATH:/github/home/.local/bin
+          echo $PATH
           pdm install
 
       - run: cd tests && pdm run pytest -sx
