@@ -1,4 +1,5 @@
 import os
+import signal
 from pathlib import Path
 
 import pytest
@@ -22,10 +23,10 @@ def ws_client(xprocess):
         }
 
     # ensure process is running and return its logfile
-    logfile = xprocess.ensure("gunicorn", Starter)
+    pid, logpath = xprocess.ensure("gunicorn", Starter)
 
     client = GraphqlClient(endpoint="ws://localhost:8000/graphql")
     yield client
 
     # clean up whole process tree afterwards
-    xprocess.getinfo("gunicorn").terminate()
+    os.kill(pid, signal.SIGKILL)
