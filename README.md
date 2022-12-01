@@ -15,6 +15,8 @@ Most of the Django Graphene websocket subscription implementations are broke wit
 
 ## Adding Luna to Your Django Project
 
+See the [Luna Starter Project](https://github.com/cognitive-space/graphene-luna-starter) for a fully setup Django project with Graphene and Luna installed.
+
 ### Step 1: Update Your `asgi.py`
 
 Add the following at the end of your `asgi.py`
