@@ -126,3 +126,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 GRAPHENE = {
     "SCHEMA": "lunastarter.schema.schema"
 }
+
+GRAPHQL_WS_MIDDLEWARE = [
+    'lunastarter.middleware.AuthAsyncMiddleware',
+]
+
+GRAPHQL_MESSAGE_MIDDLEWARE = [
+    'lunastarter.middleware.MessageMiddleware',
+]
