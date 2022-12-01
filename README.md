@@ -1,7 +1,7 @@
 # Graphene Luna
 
 Graphene Luna is a websocket backend for GraphQL subscriptions in Django with Graphene. It does not require
-Django Channels. It implements the [subscriptions-transport-ws](https://github.com/apollographql/subscriptions-transport-ws) protocol.
+Django Channels. Luna implements the [subscriptions-transport-ws](https://github.com/apollographql/subscriptions-transport-ws) protocol.
 
 ## Why Luna
 
