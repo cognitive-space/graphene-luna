@@ -1,6 +1,6 @@
 [project]
 name = "graphene-luna"
-version = "0.3.0"
+version = "0.4.0"
 description = "Websocket backend for GraphQL (Graphene) subscriptions, does not require Django Channels"
 authors = [
     {name = "Paul Bailey", email = "paul.bailey@cognitivespace.com"},
