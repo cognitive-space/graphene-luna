@@ -45,7 +45,7 @@ application = add_ws_app(application)
 
 You should have Graphene setup with a schema. If not see the [Graphene installation](https://docs.graphene-python.org/projects/django/en/latest/installation/) steps.
 
-In your Graphene settings verify you have schema:
+In your Graphene settings verify you have a schema:
 
 ```python
 GRAPHENE = {

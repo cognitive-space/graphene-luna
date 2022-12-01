@@ -66,6 +66,8 @@ class AuthAsyncMiddleware:
 
 This is a convenience middleware that lets you intercept the messages before and after they have been processed by GraphQL. This could be implemented by modifying the send and receive functions in the websocket middleware, but this gives you a simpler mechanism to modify messages more directly.
 
+*Deprecation Notice: this will be changed for v1.0 release*
+
 Message middleware setup in `settings.py`:
 
 ```python
