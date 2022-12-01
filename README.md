@@ -7,7 +7,7 @@ Django Channels. Luna implements the [subscriptions-transport-ws](https://github
 
 Most of the Django Graphene websocket subscription implementations are broke with newer versions of Django or require Django Channels. While Django Channels is great, it is complex and requires extra infrastructure such as Redis. With new versions of Django, the included asynchronous features allow websockets to be created more "natively" with less infrastructure and code overhead.
 
-*Graphene Luna is the new modern way to do GraphQL subscriptions in Django.*
+*Graphene Luna is the new modern and easy way to do GraphQL subscriptions in Django.*
 
 ## Installation
 
