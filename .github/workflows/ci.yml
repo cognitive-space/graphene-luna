@@ -7,6 +7,7 @@ jobs:
     container:
       image: bitnami/python:3.10
     steps:
+      - run: install_packages lsb-core
       - name: Check out repository code
         uses: actions/checkout@v3
       - uses: actions/setup-python@v4
