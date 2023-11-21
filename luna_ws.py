@@ -19,10 +19,6 @@ except ImportError:
     import logging
     logger = logging.getLogger(__name__)
 
-### Protocol Docs ###
-# Old: https://github.com/apollographql/subscriptions-transport-ws/blob/master/PROTOCOL.md
-# New: https://github.com/enisdenjo/graphql-ws/blob/master/PROTOCOL.md
-
 
 class GraphqlRequest(ASGIRequest):
 
@@ -115,7 +111,7 @@ class GraphQLWebSocketHandler:
 
             if event['type'] == 'websocket.connect':
                 logger.info('Websocket Opened')
-                await send({'type': 'websocket.accept', 'subprotocol': 'graphql-ws'})
+                await send({'type': 'websocket.accept', 'subprotocol': 'graphql-transport-ws'})
                 ws.connected = True
 
             elif event['type'] == 'websocket.disconnect':
@@ -124,10 +120,11 @@ class GraphQLWebSocketHandler:
 
             elif event['type'] == 'websocket.receive':
                 data = json.loads(event['text'])
+                print(data)
                 mname = f"process_{data['type']}"
                 method = getattr(self, mname, None)
                 if method:
-                    if method == 'process_start':
+                    if method == 'process_subscribe':
                         # send task to the background since it's probably long running
                         op_id = data['id']
                         tasks[op_id] = asyncio.create_task(method(ws, send, data))
@@ -148,7 +145,7 @@ class GraphQLWebSocketHandler:
         op_id = data['id']
         ws.complete[op_id] = True
 
-    async def process_start(self, ws, send, data):
+    async def process_subscribe(self, ws, send, data):
         op_id = data.get('id')
 
         result = await self.schema.subscribe(
@@ -167,14 +164,14 @@ class GraphQLWebSocketHandler:
                     del ws.complete[op_id]
                     break
 
-                await self.graphql_send(ws, send, id=op_id, op_type='data', payload=item.formatted)
+                await self.graphql_send(ws, send, id=op_id, op_type='next', payload=item.formatted)
 
         else:
             if result.errors:
                 await self.graphql_send(ws, send, id=op_id, op_type='error', payload=result.formatted)
 
             else:
-                await self.graphql_send(ws, send, id=op_id, op_type='data', payload=result.formatted)
+                await self.graphql_send(ws, send, id=op_id, op_type='next', payload=result.formatted)
 
         await self.graphql_send(ws, send, id=op_id, op_type='complete')
 
