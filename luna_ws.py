@@ -120,7 +120,6 @@ class GraphQLWebSocketHandler:
 
             elif event['type'] == 'websocket.receive':
                 data = json.loads(event['text'])
-                print(data)
                 mname = f"process_{data['type']}"
                 method = getattr(self, mname, None)
                 if method:
