@@ -9,6 +9,10 @@ Most of the Django Graphene websocket subscription implementations are broke wit
 
 *Graphene Luna is the new modern and easy way to do GraphQL subscriptions in Django.*
 
+## django-ws
+
+Graphene Luna relies on [django-ws](https://github.com/pizzapanther/django-ws). If you wish to customize your experience, refer to django-ws for things like middleware and customizing websocket methods.
+
 ## Installation
 
 `pip install graphene-luna`
@@ -19,31 +23,32 @@ See the [Luna Starter Project](https://github.com/cognitive-space/graphene-luna-
 
 ### Step 1: Update Your `asgi.py`
 
-Add the following at the end of your `asgi.py`
+- Remove line: `from django.core.asgi import get_asgi_application`
+- Remove line: `application = get_asgi_application()`
+
+Add to the end:
 
 ```python
-from luna_ws import add_ws_app
+from django_ws import get_websocket_application
 
-application = add_ws_app(application)
+application = get_websocket_application()
 ```
 
-The entire `asgi.py` should look something like the following:
+### Step 2: Connect the GraphQL Websocket in `ws_urls.py`
+
+Next to your root `urls.py` create a `ws_urls.py` like the example below that uses your websocket.
 
 ```python
-import os
+from django.urls import path
 
-from django.core.asgi import get_asgi_application
+import luna_ws
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
-
-application = get_asgi_application()
-
-from luna_ws import add_ws_app
-
-application = add_ws_app(application)
+urlpatterns = [
+  path('graphql', luna_ws.GraphQLSubscriptionHandler),
+]
 ```
 
-### Step 2: Verify Your Schema is Setup
+### Step 3: Verify Your Schema is Setup
 
 You should have Graphene setup with a schema. If not see the [Graphene installation](https://docs.graphene-python.org/projects/django/en/latest/installation/) steps.
 
@@ -109,10 +114,9 @@ If you're subscription test was successful, then you can proceed to writing more
 
 ## Compatibility Notes
 
-Currently Luna works with [Django Graphene](https://github.com/graphql-python/graphene-django) 3.0+ only. Also, Luna implements the newer protocol of graphql-ws.
+Currently Luna works with [Django Graphene](https://github.com/graphql-python/graphene-django) 3.1+ only. Also, Luna implements the newer GraphQL subscription protocol [graphql-ws](https://github.com/enisdenjo/graphql-ws/blob/master/PROTOCOL.md).
 
 ## Going Further
 
 - [Example Subscriptions](docs/subs-examples.md)
-- [Middleware for Websockets](docs/middleware.md)
 - [Implementation Details](docs/details.md)
