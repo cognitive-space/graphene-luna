@@ -9,7 +9,6 @@ dependencies = [
     "graphene-django>=3.1.5",
     "websockets>=10.4",
     "django-ws>=1.0.0",
-    "python-graphql-client @ git+https://github.com/pizzapanther/python-graphql-client.git",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
