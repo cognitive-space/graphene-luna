@@ -1,6 +1,6 @@
 [project]
 name = "graphene-luna"
-version = "0.5.0"
+version = "1.0.0"
 description = "Websocket backend for GraphQL (Graphene) subscriptions, does not require Django Channels"
 authors = [
     {name = "Paul Bailey", email = "paul.bailey@cognitivespace.com"},
@@ -8,6 +8,7 @@ authors = [
 dependencies = [
     "graphene-django>=3.0.0",
     "websockets>=10.4",
+    "django-ws>=1.0.0",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
@@ -16,7 +17,6 @@ license = {text = "BSDv3"}
 [project.urls]
 homepage = "https://github.com/cognitive-space/graphene-luna"
 
-[project.optional-dependencies]
 [build-system]
 requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"

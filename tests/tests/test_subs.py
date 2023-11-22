@@ -19,6 +19,7 @@ async def test_subscription(ws_client):
     count = cache.get('count')
     assert count == 5
 
+
 @pytest.mark.asyncio
 async def test_middleware(ws_client):
     cache.set('pre-message', 0)
