@@ -131,4 +131,5 @@ dmypy.json
 .pdm.toml
 db.sqlite3
 .pdm-python
+requirements.txt
 

@@ -1,3 +1,5 @@
+from django.core.cache import cache
+
 from luna_ws import GraphQLSubscriptionHandler
 
 

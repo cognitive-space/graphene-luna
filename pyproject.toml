@@ -6,9 +6,10 @@ authors = [
     {name = "Paul Bailey", email = "paul.bailey@cognitivespace.com"},
 ]
 dependencies = [
-    "graphene-django>=3.0.0",
+    "graphene-django>=3.1.5",
     "websockets>=10.4",
     "django-ws>=1.0.0",
+    "python-graphql-client @ git+https://github.com/pizzapanther/python-graphql-client.git",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
@@ -31,4 +32,5 @@ dev = [
     "pytest-asyncio>=0.20.2",
     "pytest-xprocess>=0.21.0",
     "python-graphql-client @ git+https://github.com/pizzapanther/python-graphql-client.git",
+    "whitenoise>=6.6.0",
 ]

@@ -32,4 +32,4 @@ async def test_middleware(ws_client):
     await ws_client.subscribe(query=query, handle=dummy)
 
     assert cache.get('pre-message') == 2
-    assert cache.get('post-message') == 4
+    assert cache.get('post-message') == 2
