@@ -16,3 +16,6 @@ class WSHandler(GraphQLSubscriptionHandler):
             cache.incr('post-message')
         except ValueError:
             pass
+
+    async def on_close (self):
+        print('CLOSED')
